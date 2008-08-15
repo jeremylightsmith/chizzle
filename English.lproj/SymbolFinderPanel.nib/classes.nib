@@ -1,0 +1,20 @@
+{
+    IBClasses = (
+        {CLASS = BigLetterView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {accept = id; search = id; }; 
+            CLASS = SymbolFinder; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "matches_table" = NSTableView; 
+                "search_field" = NSSearchField; 
+                window = NSPanel; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = SymbolFinderView; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }, 
+        {CLASS = SymbolSearchField; LANGUAGE = ObjC; SUPERCLASS = NSSearchField; }
+    ); 
+    IBVersion = 1; 
+}

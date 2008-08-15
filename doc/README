@@ -1,0 +1,12 @@
+=Chizzle is a Ruby-Cocoa based IDE for Ruby
+
+It wants to grow up to be a slimmed down version of what intellij is for java.
+
+Pro Tips :
+
+=Debugging 
+  - use Console.app 
+    - if it is open when you launch your app, then it will get anything that would otherwise go to the console (nice to know)
+  - open CrashReporterPrefs, and set mode to "Developer"
+    - this gives you actual stack traces when everything crashes
+    

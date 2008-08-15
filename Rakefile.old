@@ -1,0 +1,73 @@
+require 'rake/clean'
+require 'rake/testtask'
+require 'rubygems'
+require 'spec/rake/spectask'
+
+APPNAME = 'Chizzle'
+BUNDLEID = "cocoa.#{APPNAME}"
+TARGET = "#{APPNAME}.app"
+NIBDIR = "English.lproj"
+
+LIBS = "-lobjc -framework RubyCocoa -framework Foundation -framework WebKit"
+CFLAGS = "-Wall"
+
+desc "Default Task"
+task :default => [:spec, :app, :debug]
+
+task :clean do
+  rm_rf TARGET
+  rm_rf 'build'
+  rm FileList['**/*.o']
+end
+
+task :test => :spec
+
+Spec::Rake::SpecTask.new(:spec) do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
+end
+
+task :run => :app do
+  `open #{TARGET}`
+end
+
+task :debug => :app do
+  dir = ENV['DIR'] || 'example_project'
+  `#{TARGET}/Contents/MacOS/#{APPNAME} #{dir}`
+end
+
+task :app do
+  unless File.exist? TARGET
+    puts "building..."
+    m_files = FileList["**/*.m"]
+
+    o_files = m_files.each do |m_file|
+      o_file = m_file.sub /\.m$/, '.o'
+      if !uptodate? o_file, [m_file]
+        run "cc #{CFLAGS} -c -o #{o_file} #{m_file}"
+      end
+      o_file
+    end
+    
+    run "cc #{o_files.join ' '} #{LIBS}"
+  
+    rm_rf TARGET
+    mkdir_p "#{TARGET}/Contents/MacOS"
+    mkdir_p "#{TARGET}/Contents/Resources"
+    mv "a.out", "#{TARGET}/Contents/MacOS/#{APPNAME}"
+    cp "Info.plist", "#{TARGET}/Contents/Info.plist"
+    run "echo -n \"APPL????\" > #{TARGET}/Contents/PkgInfo"
+  end
+
+  cp_r NIBDIR, "#{TARGET}/Contents/Resources"
+  cp_r FileList["lib/*"].to_a, "#{TARGET}/Contents/Resources"
+  rm_rf Dir["#{TARGET}/**/.svn"]
+end
+
+def run(command)
+  puts "  #{command}"
+  if !system(command)
+    puts "    FAILED"
+    puts
+    exit(1)
+  end
+end

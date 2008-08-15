@@ -1,0 +1,75 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                "close_file" = id; 
+                "focus_to_editor" = id; 
+                "focus_to_file_list" = id; 
+                "focus_to_output" = id; 
+                "goto_class" = id; 
+                "goto_file" = id; 
+                "goto_symbol" = id; 
+                "new_file" = id; 
+                "open_file" = id; 
+                run = id; 
+                "save_all" = id; 
+            }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                drawer = NSDrawer; 
+                "file_list" = FileListController; 
+                "file_tabs" = NSTabView; 
+                "output_view" = NSTextView; 
+                window = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = FileListController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"app_controller" = AppController; view = NSOutlineView; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FileListView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {cancel = id; go = id; show = id; }; 
+            CLASS = GotoLineController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "app_controller" = AppController; 
+                "line_field" = NSTextField; 
+                window = NSPanel; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {cancel = id; create = id; show = id; }; 
+            CLASS = NewFileController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "app_controller" = AppController; 
+                "location_field" = NSTextField; 
+                "name_field" = NSTextField; 
+                window = NSPanel; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {crap = id; sneeze = id; }; 
+            CLASS = SomeController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"app_controller" = AppController; window = NSWindow; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {"close_tab" = id; "next_tab" = id; "previous_tab" = id; }; 
+            CLASS = TabController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {"tab_view" = NSTabView; }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

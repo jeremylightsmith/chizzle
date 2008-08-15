@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+target = File.dirname(__FILE__) + "/Chizzle.app/Contents/MacOS/Chizzle"
+
+exec "#{target} #{ARGV[0]}" if fork.nil?
